@@ -50,7 +50,11 @@ Run the full analysis.`.trim();
       messages: [{ role: "user", content: userMessage }],
     });
 
-    const raw = message.content[0].text;
+    let raw = message.content[0].text;
+
+    // Strip markdown fences if Claude wraps the JSON in ```json ... ```
+    raw = raw.replace(/^```(?:json)?\s*\n?/, "").replace(/\n?```\s*$/, "").trim();
+
     const parsed = JSON.parse(raw);
 
     // Generate a simple ID for shareable links
