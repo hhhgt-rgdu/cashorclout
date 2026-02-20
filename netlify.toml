@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "npm run build && if [ -d restricted ]; then mkdir -p dist/restricted && cp -R restricted/. dist/restricted/; fi"
   publish = "dist"
   functions = "netlify/functions"
 
